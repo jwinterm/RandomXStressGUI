@@ -12,7 +12,7 @@ Checking Hugepages causes it to crash on my computer, but I think it's just caus
 
 
 If you want to build [randomx-stress](https://github.com/00-matt/randomx-stress) yourself, here are instructions:  
-# Install gcc, g++, cmake, and git through your package manager
+#### Install gcc, g++, cmake, and git through your package manager
 
 ```git clone https://github.com/tevador/randomx.git
 mkdir randomx/build
