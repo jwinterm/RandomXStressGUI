@@ -6,6 +6,6 @@ Give it a couple seconds to start up and a couple seconds after pressing Start.
 
 Checking Hugepages causes it to crash on my computer, but I think it's just cause I don't have hugepages enabled (it crashes if I try to run the underlying program from command line with -H also).
 
-https://i.imgur.com/oeRk2vA.png
+![Not running](https://i.imgur.com/oeRk2vA.png)
 
-https://i.imgur.com/KVHnpTM.png
+![Running](https://i.imgur.com/KVHnpTM.png)
