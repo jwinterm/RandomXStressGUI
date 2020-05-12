@@ -21,6 +21,13 @@ def enqueue_output(p, q):
             q.put_nowait(out.strip())
 
 
+def resource_path(relative_path):    
+    try:       
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 class Window(Frame):
 
     def __init__(self, master=None):
@@ -30,8 +37,8 @@ class Window(Frame):
         self.p = None
         self.q = queue.Queue()
         self.threads = 4
-        self.imgStopped = ImageTk.PhotoImage(Image.open("notstress.jpg"))
-        self.imgStarted = ImageTk.PhotoImage(Image.open("stress.jpg")) 
+        self.imgStopped = ImageTk.PhotoImage(Image.open(resource_path("notstress.jpg")))
+        self.imgStarted = ImageTk.PhotoImage(Image.open(resource_path("stress.jpg")))
         self.checkbuttonvar = IntVar()
         self.init_window()
 
@@ -82,14 +89,14 @@ class Window(Frame):
             self.threadsEntry.delete(0, 4)
             self.threadsEntry.insert(0, self.threads)
             if not self.checkbuttonvar.get():
-                self.p = subprocess.Popen([r"randomx-stress.exe", "-t", str(self.threads)],
+                self.p = subprocess.Popen([resource_path("randomx-stress.exe"), "-t", str(self.threads)],
                             stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT,
                             #shell=True,
                             encoding='utf-8',
                             errors='replace')
             elif self.checkbuttonvar.get():
-                self.p = subprocess.Popen([r"randomx-stress.exe", "-t", str(self.threads), "-H"],
+                self.p = subprocess.Popen([resource_path("randomx-stress.exe"), "-t", str(self.threads), "-H"],
                             stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT)
             self.t = threading.Thread(target=enqueue_output, args=(self.p, self.q))
@@ -123,24 +130,26 @@ class Window(Frame):
                 line = self.q.get_nowait()
                 #newline = self.q.get(block=False)
                 #newLine = newLine.decode('utf-8')
-                print(line)
+                #print(line)
                 try:
                     #hashrate = line.split(' ')[0]
                     hashrate = re.findall("\d+\.\d+", line)[0]
-                    print(hashrate)
+                    #print(hashrate)
                     self.hashrateLabel.config(text="Hashrate: {0:.2f} h/s".format(float(hashrate)))
                 except:
-                    print("cant parse")
+                    pass
+                    # print("cant parse")
             except:
-                print("error")
+                pass
+                #print("error")
         self.hashrateLabel.after(2000, self.refresh_hashrate)
 
     def client_exit(self):
-        exit()
+        sys.exit(0)
 
 
 root = Tk()
-root.iconbitmap('./stress.ico')
+root.iconbitmap(default=resource_path('stress.ico'))
 root.geometry("400x300")
 
 app = Window(root)
