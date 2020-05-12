@@ -11,7 +11,8 @@ Checking Hugepages causes it to crash on my computer, but I think it's just caus
 ![Running](https://i.imgur.com/KVHnpTM.png?1)
 
 
-If you want to build [randomx-stress](https://github.com/00-matt/randomx-stress) yourself, here are instructions:  
+### If you want to build [randomx-stress](https://github.com/00-matt/randomx-stress) yourself, here are instructions:  
+
 #### Install gcc, g++, cmake, and git through your package manager
 
 ```git clone https://github.com/tevador/randomx.git
@@ -29,4 +30,5 @@ cd $_
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
 ./randomx-stress --args --here```
-If you want to build an exe you can use Visual Studio on Windows (somehow...) or use mingw on Windows or as a cross compiler.
+
+#### If you want to build an exe you can use Visual Studio on Windows (somehow...) or use mingw on Windows or as a cross compiler.
