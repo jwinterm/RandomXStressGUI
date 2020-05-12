@@ -29,6 +29,7 @@ mkdir randomx-stress/build
 cd $_
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
-./randomx-stress --args --here```
+./randomx-stress --args --here
+```  
 
 #### If you want to build an exe you can use Visual Studio on Windows (somehow...) or use mingw on Windows or as a cross compiler.
